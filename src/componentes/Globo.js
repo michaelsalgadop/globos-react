@@ -1,23 +1,12 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFly } from "@fortawesome/free-brands-svg-icons";
 export const Globo = (props) => {
-  const {
-    posicionActual,
-    setPosicionActual,
-    cambiarPosicion,
-    aumentarContador,
-  } = props;
-
+  const { posicion, cambiarPosicion, incrementarContador } = props;
   return (
-    <div className="App">
-      <FontAwesomeIcon
-        icon={faFly}
-        id="globo"
-        className="globo fab fa-fly"
-        style={{ top: posicionActual.y, left: posicionActual.x }}
-        onMouseOver={cambiarPosicion}
-        onClick={aumentarContador}
-      />
-    </div>
+    <i
+      id="globo"
+      className="globo fab fa-fly"
+      onClick={incrementarContador}
+      onMouseOver={cambiarPosicion}
+      style={{ top: posicion.top, left: posicion.left }}
+    ></i>
   );
 };

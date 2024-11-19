@@ -1,43 +1,30 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Globo } from "./componentes/Globo";
 import { Marcador } from "./componentes/Marcador";
 
 function App() {
   const maxAncho = window.innerWidth;
   const maxAlto = window.innerHeight;
-  const [posicionActual, setPosicionActual] = useState({
-    x: () => getNuevaPosicion(maxAncho),
-    y: () => getNuevaPosicion(maxAlto),
-  });
+  const getPosicionAleatoria = {
+    top: Math.floor(Math.random() * maxAlto),
+    left: Math.floor(Math.random() * maxAncho),
+  };
+  const [posicion, setPosicion] = useState(getPosicionAleatoria);
   const [contador, setContador] = useState(0);
-  useEffect(() => {
-    const nuevaPosicion = {
-      x: getNuevaPosicion(maxAncho),
-      y: getNuevaPosicion(maxAlto),
-    };
-    setPosicionActual(nuevaPosicion);
-  }, [maxAncho, maxAlto]);
+
   const cambiarPosicion = () => {
-    const nuevaPosicion = {
-      x: getNuevaPosicion(maxAncho),
-      y: getNuevaPosicion(maxAlto),
-    };
-    setTimeout(() => setPosicionActual(nuevaPosicion), 300);
+    setTimeout(() => setPosicion(getPosicionAleatoria), 300);
   };
-  const getNuevaPosicion = (tope) => {
-    const min = Math.ceil(0);
-    return Math.floor(Math.random() * (tope - min + 1)) + min;
-  };
-  const aumentarContador = () => {
+
+  const incrementarContador = () => {
     setContador(contador + 1);
   };
   return (
     <div className="">
       <Globo
-        posicionActual={posicionActual}
-        setPosicionActual={setPosicionActual}
+        posicion={posicion}
         cambiarPosicion={cambiarPosicion}
-        aumentarContador={aumentarContador}
+        incrementarContador={incrementarContador}
       ></Globo>
       <Marcador contador={contador}></Marcador>
     </div>
